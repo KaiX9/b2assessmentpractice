@@ -35,7 +35,14 @@ public class TasksController {
             Task task = new Task();
             System.out.printf(">>> POST: %s\n", form);
             String username = form.getFirst("username");
-            user.setUsername(username);
+            if (username.matches("[a-zA-Z0-9]+")) {
+                user.setUsername(username);
+            } else {
+                mav = new ModelAndView("error");
+                mav.addObject("message", true);
+                return mav;
+            }
+            
             System.out.println("Username >>> " + username);
 
             List<Task> tasks = new ArrayList<Task>();
@@ -66,8 +73,8 @@ public class TasksController {
         } catch (Exception e) {
             mav.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
             mav.setViewName("error");
+            mav.addObject("message", false);
             return mav;
         }
-        
     }    
 }

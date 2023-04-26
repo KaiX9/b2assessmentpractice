@@ -6,5 +6,9 @@
     </head>
     <body>
         <h1>Cannot create new task. An error has occured</h1>
+        <br>
+        <h4 data-th-if="${message}">
+            <span>Error: Username cannot have special characters or spaces</span>
+        </h4>
     </body>
 </html>
